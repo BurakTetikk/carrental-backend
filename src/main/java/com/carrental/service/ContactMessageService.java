@@ -2,6 +2,8 @@ package com.carrental.service;
 
 import com.carrental.domain.ContactMessage;
 import com.carrental.dto.response.CarRentalResponse;
+import com.carrental.exception.ResourceNotFoundException;
+import com.carrental.exception.message.ErrorMessage;
 import com.carrental.repository.ContactMessageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -29,5 +31,11 @@ public class ContactMessageService {
 
     public Page<ContactMessage> getAllContactMessagesWithPage(Pageable pageable) {
         return contactMessageRepository.findAll(pageable);
+    }
+
+    public ContactMessage getContactMessageBy_Id(Long id) {
+        return contactMessageRepository.
+                findById(id).
+                orElseThrow(() -> new ResourceNotFoundException(String.format(ErrorMessage.CONTACT_MESSAGE_RESOURCE_NOT_FOUND,"Burak", id)));
     }
 }

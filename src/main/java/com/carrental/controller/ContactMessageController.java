@@ -65,6 +65,20 @@ public class ContactMessageController {
         return ResponseEntity.ok(contactMessageDTOPage);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ContactMessageDTO> getContactMessageByIdPathVariable(@PathVariable(name = "id") Long id) {
+        ContactMessage contactMessage = contactMessageService.getContactMessageBy_Id(id);
+        ContactMessageDTO contactMessageDTO = contactMessageMapper.contactMessageToContactMessageDTO(contactMessage);
+        return ResponseEntity.ok(contactMessageDTO);
+    }
+
+    @GetMapping("/request")
+    public ResponseEntity<ContactMessageDTO> getContactMessageByIdRequestParam(@RequestParam("id") Long id) {
+        ContactMessage contactMessage = contactMessageService.getContactMessageBy_Id(id);
+        ContactMessageDTO contactMessageDTO = contactMessageMapper.contactMessageToContactMessageDTO(contactMessage);
+        return ResponseEntity.ok(contactMessageDTO);
+    }
+
 
 
 
