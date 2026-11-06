@@ -23,6 +23,16 @@ spring:
       include-message: always
       include-stacktrace: never
 
+logging:
+  file:
+    name: log/carrental.log
+  pattern:
+    file: "%d %-5level [%thread] %logger:%msg%n"
+  level:
+    '[org.springframework]': WARN
+    '[org.hibernate]': INFO
+    '[com.carrental]': DEBUG
+
 info:
   application:
     name: 'Carrental Backend App'

@@ -79,18 +79,22 @@ public class ContactMessageController {
         return ResponseEntity.ok(contactMessageDTO);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CarRentalResponse> deleteContactMessageById(@PathVariable(name = "id") Long id) {
+        CarRentalResponse carRentalResponse = contactMessageService.deleteContactMessageBy_Id(id);
+        return ResponseEntity.ok(carRentalResponse);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CarRentalResponse> updateContactMessage(@PathVariable("id") Long id, @RequestBody ContactMessagePayload contactMessagePayload) {
+        ContactMessage contactMessage = contactMessageMapper.contactMessagePayloadToContactMessage(contactMessagePayload);
+        CarRentalResponse carRentalResponse = contactMessageService.updateContactMessage(id, contactMessage);
+        return ResponseEntity.ok(carRentalResponse);
+
+    }
 
 
-
-
-
-
-
-
-
-
-
-   // ================== YARDIMCI METHODLAR ==================
+    // ================== YARDIMCI METHODLAR ==================
     private Page<ContactMessageDTO> map(Page<ContactMessage> contactMessages) {
 
         return contactMessages.map(contactMessageMapper::contactMessageToContactMessageDTO);
