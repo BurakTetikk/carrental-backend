@@ -48,6 +48,11 @@ management:
     shutdown:
       enabled: true
 
+carrental:
+  app:
+    jwtSecret: carRental@!
+    jwtExpiration: 86400000
+
 info:
   application:
     name: 'Carrental Backend App'
