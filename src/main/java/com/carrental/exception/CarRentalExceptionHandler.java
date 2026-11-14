@@ -41,6 +41,14 @@ public class CarRentalExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(apiResponseError);
     }
 
+    @ExceptionHandler(ConflictException.class)
+    protected ResponseEntity<Object> handleConflictException(ConflictException ex, WebRequest request) {
+
+        ApiResponseErrorRecord apiResponseError = new ApiResponseErrorRecord(HttpStatus.CONFLICT, ex.getMessage(), request.getDescription(false));
+
+        return buildResponseEntity(apiResponseError);
+    }
+
 
     @Override
     protected @Nullable ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
